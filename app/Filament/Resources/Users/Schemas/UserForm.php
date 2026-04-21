@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -20,17 +19,12 @@ class UserForm
                     ->email()
                     ->required(),
 
-                // Using Select Component
-                Select::make('roles')
-                    ->relationship('roles', 'name')
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
-
                 // Using CheckboxList Component
                 CheckboxList::make('roles')
                     ->relationship('roles', 'name')
-                    ->searchable(),
+                    ->columns(2)
+                    ->searchable()
+                    ->getOptionLabelFromRecordUsing(fn ($record) => str($record->name)->replace('_', ' ')->title()),
 
             ]);
     }
