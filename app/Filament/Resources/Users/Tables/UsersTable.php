@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Filament\Resources\Users\UserResource;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -30,7 +32,13 @@ class UsersTable
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make()
+                DeleteAction::make(),
+
+                Action::make('activities')
+                    ->icon('heroicon-o-clock')
+                    ->color('warning')
+                    ->url(fn ($record) => UserResource::getUrl('activities', ['record' => $record]))
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

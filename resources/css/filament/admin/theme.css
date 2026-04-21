@@ -1,7 +1,9 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import '../../../../vendor/pxlrbt/filament-activity-log/resources/css/styles.css';
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 @source '../../../../resources/views/components/**/*';
 @source '../../../../resources/views/livewire/**/*';
 @source '../../../../app/Livewire/**/*';
+
