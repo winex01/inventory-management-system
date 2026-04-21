@@ -17,7 +17,12 @@ class UserForm
                 TextInput::make('email')
                     ->label('Email address')
                     ->email()
-                    ->required(),
+                    ->required()
+                    ->unique(
+                        table: 'users',
+                        column: 'email',
+                        ignorable: fn ($record) => $record,
+                    ),
 
                 // Using CheckboxList Component
                 CheckboxList::make('roles')

@@ -30,4 +30,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            if (empty($user->password)) {
+                $user->password = bcrypt('password');
+            }
+        });
+    }
 }
