@@ -61,6 +61,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make()
+                    ->navigationGroup('User Management')
                     ->gridColumns([
                         'default' => 1,
                         'sm' => 2,
