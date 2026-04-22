@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\OrderResource\Pages;
+namespace Filament\Resources\Pages\Concerns;
 
 use App\Filament\Resources\Users\UserResource;
 use pxlrbt\FilamentActivityLog\Pages\ListActivities;
