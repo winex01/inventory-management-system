@@ -8,7 +8,6 @@ use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use App\Filament\Resources\Roles\Pages\CreateRole;
 use App\Filament\Resources\Roles\Pages\EditRole;
 use App\Filament\Resources\Roles\Pages\ListRoles;
-use App\Filament\Resources\Roles\Pages\ViewRole;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use BezhanSalleh\FilamentShield\Traits\HasShieldFormComponents;
 use BezhanSalleh\PluginEssentials\Concerns\Resource as Essentials;
@@ -74,8 +73,9 @@ class RoleResource extends Resource
                                     ->options(fn (): array => in_array(Utils::getTenantModel(), [null, '', '0'], true) ? [] : Utils::getTenantModel()::pluck('name', 'id')->toArray())
                                     ->visible(fn (): bool => static::shield()->isCentralApp() && Utils::isTenancyEnabled())
                                     ->dehydrated(fn (): bool => static::shield()->isCentralApp() && Utils::isTenancyEnabled()),
-                                static::getSelectAllFormComponent(),
 
+                                static::getSelectAllFormComponent()
+                                    ->inline(false)
                             ])
                             ->columns([
                                 'sm' => 2,
@@ -101,6 +101,7 @@ class RoleResource extends Resource
                 TextColumn::make('guard_name')
                     ->badge()
                     ->color('warning')
+                    ->hidden()
                     ->label(__('filament-shield::filament-shield.column.guard_name')),
                 TextColumn::make('team.name')
                     ->default('Global')
