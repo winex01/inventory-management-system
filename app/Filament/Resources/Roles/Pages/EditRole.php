@@ -6,13 +6,10 @@ namespace App\Filament\Resources\Roles\Pages;
 
 use App\Filament\Resources\Roles\RoleResource;
 use BezhanSalleh\FilamentShield\Support\Utils;
-use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
-use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Js;
 use Override;
 
 class EditRole extends EditRecord
@@ -26,21 +23,6 @@ class EditRole extends EditRecord
         return [
             DeleteAction::make(),
         ];
-    }
-
-    #[Override]
-    protected function getCancelFormAction(): Action
-    {
-        $url = $this->getResource()::getUrl('index');
-
-        return Action::make('cancel')
-            ->label(__('filament-panels::resources/pages/edit-record.form.actions.cancel.label'))
-            ->alpineClickHandler(
-                FilamentView::hasSpaMode($url)
-                    ? 'Livewire.navigate(' . Js::from($url) . ')'
-                    : 'window.location.href = ' . Js::from($url),
-            )
-            ->color('gray');
     }
 
     #[Override]
