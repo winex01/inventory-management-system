@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class UserForm
@@ -12,25 +13,30 @@ class UserForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required()
-                    ->unique(
-                        table: 'users',
-                        column: 'email',
-                        ignorable: fn ($record) => $record,
-                    ),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->required(),
 
-                // Using CheckboxList Component
-                CheckboxList::make('roles')
-                    ->relationship('roles', 'name')
-                    ->columns(2)
-                    ->searchable()
-                    ->getOptionLabelFromRecordUsing(fn ($record) => str($record->name)->replace('_', ' ')->title()),
+                        TextInput::make('email')
+                            ->label('Email address')
+                            ->email()
+                            ->required()
+                            ->unique(
+                                table: 'users',
+                                column: 'email',
+                                ignorable: fn ($record) => $record,
+                            ),
 
+                        // Using CheckboxList Component
+                        CheckboxList::make('roles')
+                            ->relationship('roles', 'name')
+                            ->columns(2)
+                            ->searchable()
+                            ->getOptionLabelFromRecordUsing(fn ($record) => str($record->name)->replace('_', ' ')->title()),
+                    ])
+                    ->columns(2) // This creates the 2-column layout
+                    ->columnSpanFull()
             ]);
     }
 }

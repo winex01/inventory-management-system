@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use SpyApp\ThemeEdinburgh\ThemeEdinburghPlugin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -28,13 +29,13 @@ class AppPanelProvider extends PanelProvider
             ->default()
             ->id('app')
             ->path('/')
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->viteTheme('resources/css/filament/app/theme.css')
             ->login()
             ->spa()
             ->registration()
             ->profile()
             ->colors([
-                'primary' => Color::Purple,
+                'primary' => Color::Emerald,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -61,6 +62,8 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                ThemeEdinburghPlugin::make(),
+
                 FilamentShieldPlugin::make()
                     ->navigationGroup('User Management')
                     ->gridColumns([
