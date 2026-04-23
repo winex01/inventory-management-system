@@ -128,6 +128,7 @@ return [
         'methods' => [
             'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore',
             'forceDelete', 'forceDeleteAny', 'restoreAny', 'replicate', 'reorder',
+            'viewActivitylog', 'commentActivitylog'
         ],
         'single_parameter_methods' => [
             'viewAny',

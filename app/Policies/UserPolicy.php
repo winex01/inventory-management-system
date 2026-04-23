@@ -69,4 +69,14 @@ class UserPolicy
         return $authUser->can('Reorder:User');
     }
 
+    public function viewActivitylog(AuthUser $authUser): bool
+    {
+        return $authUser->can('ViewActivitylog:User');
+    }
+
+    public function commentActivitylog(AuthUser $authUser): bool
+    {
+        return $authUser->can('CommentActivitylog:User');
+    }
+
 }

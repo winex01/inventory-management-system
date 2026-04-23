@@ -72,4 +72,14 @@ class RolePolicy
         return $authUser->can('Reorder:Role');
     }
 
+    public function viewActivitylog(AuthUser $authUser, Role $role): bool
+    {
+        return $authUser->can('ViewActivitylog:Role');
+    }
+
+    public function commentActivitylog(AuthUser $authUser, Role $role): bool
+    {
+        return $authUser->can('CommentActivitylog:Role');
+    }
+
 }
