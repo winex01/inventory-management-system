@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a3fce7625cce0b10fcf8163c8069dd4",
+    "content-hash": "87b9d900a771ca4292ee477bfa7534bc",
     "packages": [
         {
             "name": "bezhansalleh/filament-plugin-essentials",
@@ -5629,6 +5629,84 @@
                 }
             ],
             "time": "2026-02-01T09:30:04+00:00"
+        },
+        {
+            "name": "swisnl/filament-activitylog",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swisnl/filament-activitylog.git",
+                "reference": "694eff6ae17a18a20514699cfdcd4e286a29954a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swisnl/filament-activitylog/zipball/694eff6ae17a18a20514699cfdcd4e286a29954a",
+                "reference": "694eff6ae17a18a20514699cfdcd4e286a29954a",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^4.0|^5.0",
+                "php": "^8.3",
+                "spatie/laravel-activitylog": "^4.10",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.6",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^9.0",
+                "pestphp/pest": "^4.4",
+                "pestphp/pest-plugin-arch": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FilamentActivitylog": "Swis\\Filament\\Activitylog\\Facades\\FilamentActivitylog"
+                    },
+                    "providers": [
+                        "Swis\\Filament\\Activitylog\\FilamentActivitylogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Swis\\Filament\\Activitylog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rolf van de Krol",
+                    "email": "rvandekrol@swis.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Integrates spatie/laravel-activitylog with Filament",
+            "homepage": "https://github.com/swisnl/filament-activitylog",
+            "keywords": [
+                "filament-activitylog",
+                "laravel",
+                "swisnl"
+            ],
+            "support": {
+                "issues": "https://github.com/swisnl/filament-activitylog/issues",
+                "source": "https://github.com/swisnl/filament-activitylog"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/swisnl",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-18T15:33:14+00:00"
         },
         {
             "name": "symfony/clock",
