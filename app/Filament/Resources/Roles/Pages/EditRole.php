@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Roles\Pages;
 
+use App\Filament\Concerns\HasFixedCancelAction;
 use App\Filament\Resources\Roles\RoleResource;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Actions\DeleteAction;
@@ -14,6 +15,8 @@ use Override;
 
 class EditRole extends EditRecord
 {
+    use HasFixedCancelAction;
+
     public Collection $permissions;
 
     protected static string $resource = RoleResource::class;
