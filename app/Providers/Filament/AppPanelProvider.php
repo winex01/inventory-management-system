@@ -31,7 +31,7 @@ class AppPanelProvider extends PanelProvider
             ->path('/')
             ->viteTheme('resources/css/filament/app/theme.css')
             ->login()
-            // ->spa()
+            ->spa()
             ->registration()
             ->profile()
             ->colors([
@@ -65,7 +65,8 @@ class AppPanelProvider extends PanelProvider
                 ThemeEdinburghPlugin::make(),
 
                 FilamentShieldPlugin::make()
-                    ->navigationGroup('User Management')
+                    ->navigationSort(200)
+                    ->navigationGroup('Access Control')
                     ->gridColumns([
                         'default' => 1,
                         'sm' => 2,
