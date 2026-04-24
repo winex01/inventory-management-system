@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
-use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -28,12 +28,12 @@ class UserForm
                                 ignorable: fn ($record) => $record,
                             ),
 
-                        // Using CheckboxList Component
-                        CheckboxList::make('roles')
+                        Select::make('roles')
                             ->relationship('roles', 'name')
+                            ->preload()
+                            ->multiple()
                             ->columns(2)
                             ->searchable()
-                            ->getOptionLabelFromRecordUsing(fn ($record) => str($record->name)->replace('_', ' ')->title())
                             ->afterStateHydrated(function ($component, $record) {
                                 // Capture old roles BEFORE any changes when form loads
                                 if ($record) {

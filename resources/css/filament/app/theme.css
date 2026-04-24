@@ -6,4 +6,4 @@
 @source '../../../../resources/views/components/**/*';
 @source '../../../../resources/views/livewire/**/*';
 @source '../../../../app/Livewire/**/*';
-@source '../../../../vendor/swisnl/filament-activitylog/resources/views/**/*';
+@source '../../../../vendor/swisnl/filament-activitylog/resources/views*';
