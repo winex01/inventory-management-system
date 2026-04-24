@@ -91,6 +91,7 @@ class RoleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->withoutSuperAdmin())
             ->columns([
                 TextColumn::make('name')
                     ->weight(FontWeight::Medium)

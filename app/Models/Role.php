@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Spatie\Permission\Models\Role as SpatieRole;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
 {
@@ -16,6 +16,11 @@ class Role extends SpatieRole
             ->logAll()
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
+    }
+
+    public function scopeWithoutSuperAdmin($query): void
+    {
+        $query->where('name', '!=', config('filament-shield.super_admin.name', 'super_admin'));
     }
 
     public function syncPermissions(mixed ...$permissions): static

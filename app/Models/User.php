@@ -51,4 +51,9 @@ class User extends Authenticatable
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
+
+    public function scopeWithoutSuperAdmin($query): void
+    {
+        $query->whereDoesntHave('roles', fn ($q) => $q->where('name', config('filament-shield.super_admin.name', 'super_admin')));
+    }
 }
