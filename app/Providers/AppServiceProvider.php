@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Filament\Support\Enums\Width;
 use Illuminate\Support\ServiceProvider;
+use Swis\Filament\Activitylog\Actions\ActivitylogAction;
 use Swis\Filament\Activitylog\AttributeTable\Builder;
 use Swis\Filament\Activitylog\Facades\FilamentActivitylog;
 
@@ -44,5 +46,9 @@ class AppServiceProvider extends ServiceProvider
                 return null;
             }
         );
+
+        ActivitylogAction::configureUsing(function (ActivitylogAction $action) {
+            $action->modalWidth(Width::ThreeExtraLarge);
+        });
     }
 }
