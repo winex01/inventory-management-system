@@ -57,10 +57,10 @@ class UserForm
                                     ->event('updated')
                                     ->withProperties([
                                         'old' => [
-                                            'roles' => str($oldRoles)->headline(),
+                                            'roles' => $oldRoles,
                                         ],
                                         'attributes' => [
-                                            'roles' => str($newRoles)->headline(),
+                                            'roles' => $newRoles,
                                         ]
                                     ])
                                     ->log('roles updated');
