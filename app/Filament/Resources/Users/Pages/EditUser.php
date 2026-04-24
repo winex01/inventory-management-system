@@ -18,7 +18,7 @@ class EditUser extends EditRecord
     {
         return [
             DeleteAction::make(),
-            ActivitylogAction::make()->modalWidth('4xl'),
+            ActivitylogAction::make()
         ];
     }
 }

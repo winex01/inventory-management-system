@@ -54,16 +54,16 @@ class UserForm
                                 activity()
                                     ->performedOn($record)
                                     ->causedBy(auth()->user())
-                                    ->event('updated')  // Change from 'commented' to 'updated'
+                                    ->event('updated')
                                     ->withProperties([
                                         'old' => [
-                                            'role' => $oldRoles,
+                                            'roles' => str($oldRoles)->headline(),
                                         ],
                                         'attributes' => [
-                                            'role' => $newRoles,
+                                            'roles' => str($newRoles)->headline(),
                                         ]
                                     ])
-                                    ->log('updated');
+                                    ->log('roles updated');
                             }),
                     ])
                     ->columns(2) // This creates the 2-column layout

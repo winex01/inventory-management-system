@@ -12,6 +12,7 @@ use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Override;
+use Swis\Filament\Activitylog\Actions\ActivitylogAction;
 
 class EditRole extends EditRecord
 {
@@ -25,6 +26,7 @@ class EditRole extends EditRecord
     {
         return [
             DeleteAction::make(),
+            ActivitylogAction::make()
         ];
     }
 
