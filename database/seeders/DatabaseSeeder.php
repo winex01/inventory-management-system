@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Artisan::call('shield:generate', [
-        //     '--all'   => true,
-        //     '--panel' => 'app',
-        //     '--quiet' => true,
-        // ]);
+        Artisan::call('shield:generate', [
+            '--all'   => true,
+            '--panel' => 'app',
+            '--option' => 'permissions',
+            '--quiet' => true,
+        ]);
 
         $superAdminRole  = config('filament-shield.super_admin.name', 'super_admin');
         $roleModel       = config('permission.models.role');

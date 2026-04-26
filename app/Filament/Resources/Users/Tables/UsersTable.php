@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Filament\Concerns\HasSoftDeleteActions;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -12,11 +13,12 @@ use Filament\Tables\Table;
 
 class UsersTable
 {
+    use HasSoftDeleteActions;
+
     public static function configure(Table $table): Table
     {
         return $table
-            // TODO:: uncomment this scope
-            // ->modifyQueryUsing(fn ($query) => $query->withoutSuperAdmin())
+            ->modifyQueryUsing(fn ($query) => $query->withoutSuperAdmin())
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
@@ -29,16 +31,18 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                ...static::getSoftDeleteFilters(),
             ])
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-                ForceDeleteAction::make(),
-                RestoreAction::make(),
+
+                ...static::getSoftDeleteActions(),
             ])
             ->toolbarActions([
                 DeleteBulkAction::make(),
+
+                ...static::getSoftDeleteBulkActions(),
             ]);
     }
 }
