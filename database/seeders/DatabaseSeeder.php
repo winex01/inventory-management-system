@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
 
         // Create super admin user
         $winnie = User::factory()->create([
-            'name'  => 'winnie',
-            'email' => 'winnie131212592@gmail.com',
+            'name'  => str(config('filament-shield.super_admin.name', 'super user'))->headline(),
+            'email' => config('ims.super_admin_user', 'super_user@super_user.com'),
         ]);
         $winnie->assignRole($superAdminRole);
 

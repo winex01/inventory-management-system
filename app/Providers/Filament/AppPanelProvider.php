@@ -65,7 +65,7 @@ class AppPanelProvider extends PanelProvider
                 ThemeEdinburghPlugin::make(),
 
                 FilamentShieldPlugin::make()
-                    ->navigationSort(200)
+                    ->navigationSort(1000)
                     ->navigationGroup('Access Control')
                     ->gridColumns([
                         'default' => 1,
