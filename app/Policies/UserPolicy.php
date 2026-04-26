@@ -52,6 +52,11 @@ class UserPolicy
         return $authUser->can('Restore:User');
     }
 
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:User');
+    }
+
     public function forceDelete(AuthUser $authUser): bool
     {
         return $authUser->can('ForceDelete:User');
@@ -62,23 +67,18 @@ class UserPolicy
         return $authUser->can('ForceDeleteAny:User');
     }
 
-    public function restoreAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('RestoreAny:User');
-    }
-
     public function viewActivitylog(AuthUser $authUser, User $targetUser): bool
     {
         if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
             return false;
         }
 
-        return $authUser->can('ViewActivitylog:User');
+        return $authUser->can('ViewLog:User');
     }
 
     public function commentActivitylog(AuthUser $authUser): bool
     {
-        return $authUser->can('CommentActivitylog:User');
+        return $authUser->can('CommentLog:User');
     }
 
 }

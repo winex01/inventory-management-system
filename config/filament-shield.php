@@ -126,9 +126,13 @@ return [
         'merge' => true,
         'generate' => true,
         'methods' => [
-            'viewAny', 'view', 'create', 'update', 'delete', 'deleteAny', 'restore',
-            'forceDelete', 'forceDeleteAny', 'restoreAny', 'replicate', 'reorder',
-            'viewActivitylog', 'commentActivitylog'
+            'viewAny', 'view',
+            'create', 'update',
+            'delete', 'deleteAny',
+            'restore', 'restoreAny',
+            'forceDelete', 'forceDeleteAny',
+            'replicate', 'reorder',
+            'viewLog', 'commentLog'
         ],
         'single_parameter_methods' => [
             'viewAny',
