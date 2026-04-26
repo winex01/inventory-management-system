@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentActivitylog::registerEntryContentEventViewResolver('restored', 'filament-activitylog::entry-content.restored');
+        FilamentActivitylog::registerEntryContentEventViewResolver('attached', 'filament-activitylog::entry-content.attached');
+        FilamentActivitylog::registerEntryContentEventViewResolver('detached', 'filament-activitylog::entry-content.detached');
+
         FilamentActivitylog::registerAttributeTableValueFormatter(
             function (Builder $builder, mixed $value, string $key, array $attributes, string $recordClass) {
                 $timestampKeys = ['created_at', 'updated_at', 'deleted_at'];
