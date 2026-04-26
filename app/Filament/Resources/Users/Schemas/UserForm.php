@@ -30,6 +30,7 @@ class UserForm
 
                         Select::make('roles')
                             ->relationship('roles', 'name', fn ($query) => $query->withoutSuperAdmin())
+                            ->relationship('roles', 'name')
                             ->preload()
                             ->multiple()
                             ->columns(2)

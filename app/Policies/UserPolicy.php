@@ -2,21 +2,22 @@
 
 namespace App\Policies;
 
-use Illuminate\Foundation\Auth\User as AuthUser;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class UserPolicy
 {
     use HandlesAuthorization;
-    
+
+    private function isSuperAdmin(User $user): bool
+    {
+        return $user->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
+    }
+
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('ViewAny:User');
-    }
-
-    public function view(AuthUser $authUser): bool
-    {
-        return $authUser->can('View:User');
     }
 
     public function create(AuthUser $authUser): bool
@@ -24,13 +25,20 @@ class UserPolicy
         return $authUser->can('Create:User');
     }
 
-    public function update(AuthUser $authUser): bool
+    public function update(AuthUser $authUser, User $targetUser): bool
     {
+        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+            return false;
+        }
+
         return $authUser->can('Update:User');
     }
-
-    public function delete(AuthUser $authUser): bool
+    public function delete(AuthUser $authUser, User $targetUser): bool
     {
+        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+            return false;
+        }
+
         return $authUser->can('Delete:User');
     }
 
@@ -59,18 +67,12 @@ class UserPolicy
         return $authUser->can('RestoreAny:User');
     }
 
-    public function replicate(AuthUser $authUser): bool
+    public function viewActivitylog(AuthUser $authUser, User $targetUser): bool
     {
-        return $authUser->can('Replicate:User');
-    }
+        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+            return false;
+        }
 
-    public function reorder(AuthUser $authUser): bool
-    {
-        return $authUser->can('Reorder:User');
-    }
-
-    public function viewActivitylog(AuthUser $authUser): bool
-    {
         return $authUser->can('ViewActivitylog:User');
     }
 
