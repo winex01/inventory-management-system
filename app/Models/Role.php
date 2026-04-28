@@ -18,8 +18,17 @@ class Role extends SpatieRole
             ->dontSubmitEmptyLogs();
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->name === config('filament-shield.super_admin.name', 'super_admin');
+    }
+
     public function scopeWithoutSuperAdmin($query): void
     {
+        if (auth()->user()->isSuperAdmin()) {
+            return;
+        }
+
         $query->where('name', '!=', config('filament-shield.super_admin.name', 'super_admin'));
     }
 

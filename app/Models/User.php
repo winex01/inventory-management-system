@@ -56,6 +56,10 @@ class User extends Authenticatable
 
     public function scopeWithoutSuperAdmin($query): void
     {
+        if (auth()->user()->isSuperAdmin()) {
+            return;
+        }
+
         $query->whereDoesntHave('roles', fn ($q) => $q->where('name', config('filament-shield.super_admin.name', 'super_admin')));
     }
 

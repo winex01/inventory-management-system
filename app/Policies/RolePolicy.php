@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class RolePolicy
 {
     use HandlesAuthorization;
+
+    private function canAccessSuperAdminRole(AuthUser $authUser, Role $role): bool
+    {
+        return !$role->isSuperAdmin() || $authUser->isSuperAdmin();
+    }
 
     public function viewAny(AuthUser $authUser): bool
     {
@@ -19,6 +24,10 @@ class RolePolicy
 
     public function view(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('View:Role');
     }
 
@@ -29,11 +38,19 @@ class RolePolicy
 
     public function update(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('Update:Role');
     }
 
     public function delete(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('Delete:Role');
     }
 
@@ -44,11 +61,19 @@ class RolePolicy
 
     public function restore(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('Restore:Role');
     }
 
     public function forceDelete(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('ForceDelete:Role');
     }
 
@@ -64,6 +89,10 @@ class RolePolicy
 
     public function replicate(AuthUser $authUser, Role $role): bool
     {
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
         return $authUser->can('Replicate:Role');
     }
 
@@ -74,12 +103,15 @@ class RolePolicy
 
     public function viewActivitylog(AuthUser $authUser, Role $role): bool
     {
-        return $authUser->can('ViewActivitylog:Role');
+        if (!$this->canAccessSuperAdminRole($authUser, $role)) {
+            return false;
+        }
+
+        return $authUser->can('ViewLog:Role');
     }
 
     public function commentActivitylog(AuthUser $authUser, Role $role): bool
     {
-        return $authUser->can('CommentActivitylog:Role');
+        return $authUser->can('CommentLog:Role');
     }
-
 }

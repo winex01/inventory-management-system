@@ -131,7 +131,7 @@ return [
             'delete', 'deleteAny',
             'restore', 'restoreAny',
             'forceDelete', 'forceDeleteAny',
-            'replicate', 'reorder',
+            // 'replicate', 'reorder',
             'viewLog', 'commentLog'
         ],
         'single_parameter_methods' => [
