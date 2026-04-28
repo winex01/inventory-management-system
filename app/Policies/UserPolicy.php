@@ -10,14 +10,14 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    private function isSuperAdmin(User $user): bool
-    {
-        return $user->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
-    }
-
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('ViewAny:User');
+    }
+
+    public function view(AuthUser $authUser): bool
+    {
+        return $authUser->can('View:User');
     }
 
     public function create(AuthUser $authUser): bool
@@ -27,15 +27,16 @@ class UserPolicy
 
     public function update(AuthUser $authUser, User $targetUser): bool
     {
-        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+        if ($targetUser->isSuperAdmin() && !$authUser->isSuperAdmin()) {
             return false;
         }
 
         return $authUser->can('Update:User');
     }
+
     public function delete(AuthUser $authUser, User $targetUser): bool
     {
-        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+        if ($targetUser->isSuperAdmin() && !$authUser->isSuperAdmin()) {
             return false;
         }
 
@@ -69,7 +70,7 @@ class UserPolicy
 
     public function viewActivitylog(AuthUser $authUser, User $targetUser): bool
     {
-        if ($this->isSuperAdmin($targetUser) && !$this->isSuperAdmin($authUser)) {
+        if ($targetUser->isSuperAdmin() && !$authUser->isSuperAdmin()) {
             return false;
         }
 
@@ -80,5 +81,4 @@ class UserPolicy
     {
         return $authUser->can('CommentLog:User');
     }
-
 }

@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         $query->whereDoesntHave('roles', fn ($q) => $q->where('name', config('filament-shield.super_admin.name', 'super_admin')));
     }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
+    }
 }
