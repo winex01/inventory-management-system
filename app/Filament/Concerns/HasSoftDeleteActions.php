@@ -21,6 +21,7 @@ trait HasSoftDeleteActions
             ]);
     }
 
+    // NOTE:: edit page
     protected static function getSoftDeleteActions(): array
     {
         return [
@@ -29,6 +30,7 @@ trait HasSoftDeleteActions
         ];
     }
 
+    // NOTE:: bulk table
     protected static function getSoftDeleteBulkActions(): array
     {
         return [
@@ -37,6 +39,7 @@ trait HasSoftDeleteActions
         ];
     }
 
+    //
     protected static function getSoftDeleteFilters(): array
     {
         return [

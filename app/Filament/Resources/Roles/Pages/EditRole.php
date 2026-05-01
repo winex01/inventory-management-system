@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Roles\Pages;
 
 use App\Filament\Concerns\HasFixedCancelAction;
+use App\Filament\Concerns\HasSoftDeleteActions;
 use App\Filament\Resources\Roles\RoleResource;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Actions\DeleteAction;
@@ -17,6 +18,7 @@ use Swis\Filament\Activitylog\Actions\ActivitylogAction;
 class EditRole extends EditRecord
 {
     use HasFixedCancelAction;
+    use HasSoftDeleteActions;
 
     public Collection $permissions;
 
@@ -26,6 +28,7 @@ class EditRole extends EditRecord
     {
         return [
             DeleteAction::make(),
+            ...static::getSoftDeleteActions(),
             ActivitylogAction::make()
         ];
     }

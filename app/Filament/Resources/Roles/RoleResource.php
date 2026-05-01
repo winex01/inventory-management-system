@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Roles;
 
+use App\Filament\Concerns\HasSoftDeleteActions;
 use App\Filament\Resources\Roles\Pages\CreateRole;
 use App\Filament\Resources\Roles\Pages\EditRole;
 use App\Filament\Resources\Roles\Pages\ListRoles;
@@ -38,6 +39,7 @@ class RoleResource extends Resource
     use Essentials\HasLabels;
     use Essentials\HasNavigation;
     use HasShieldFormComponents;
+    use HasSoftDeleteActions;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -121,15 +123,18 @@ class RoleResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                //
+                ...static::getSoftDeleteFilters(),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
+
+                ...static::getSoftDeleteActions(),
             ])
             ->toolbarActions([
                 DeleteBulkAction::make(),
+                ...static::getSoftDeleteBulkActions(),
             ]);
     }
 
